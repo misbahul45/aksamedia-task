@@ -25,6 +25,18 @@ export const useAuth = defineStore('auth', {
     saveUsers(users: User[]) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(users))
     },
+    updateUser(data: Partial<Omit<User, 'password'>>) {
+      if (!this.user) return
+
+      const users = this.getUsers()
+      const idx = users.findIndex(u => u.email === this.user!.email)
+
+      if (idx !== -1) {
+        users[idx] = { ...users[idx], ...data }
+        this.saveUsers(users)
+        this.setSession(users[idx])
+      }
+    },
 
     setSession(user: User) {
       const { password, ...safeUser } = user

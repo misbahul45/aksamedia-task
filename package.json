@@ -10,10 +10,13 @@
   },
   "dependencies": {
     "gsap": "^3.13.0",
+    "lodash-es": "^4.17.21",
     "lucide-vue-next": "^0.525.0",
     "pinia": "^3.0.3",
+    "uuid": "^11.1.0",
     "vue": "^3.5.17",
     "vue-router": "^4.5.1",
+    "vuedraggable": "^4.1.0",
     "zod": "^4.0.5"
   },
   "devDependencies": {

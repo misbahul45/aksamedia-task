@@ -32,3 +32,24 @@ export type ValidationResult<T> =
   | { ok: false; errors: Record<string, string> }
 
 export type Web_Theme='light' | 'dark' | 'system'
+
+
+export interface SubTask {
+  id: string
+  title: string
+  status: 'todo' | 'in-progress' | 'done'
+}
+
+export interface InboxTask {
+  id: string
+  title: string
+  description?: string
+  createdAt: string
+  updatedAt?: string
+  status: 'inbox' | 'archived' | 'done'
+  tags?: string[]
+  priority?: 'low' | 'medium' | 'high'
+  boardId?: string
+  plannerDate?: string
+  subtasks?: SubTask[]
+}

@@ -2,7 +2,7 @@
 import { useAuth } from '@/stores/useAuth'
 import { User, LogOut, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 import { sidebarMenu } from '@/constants'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import Theme from '../ui/Theme.vue'
@@ -10,6 +10,7 @@ import Theme from '../ui/Theme.vue'
 const auth = useAuth()
 const { user } = storeToRefs(auth)
 const isOpen = ref(true)
+const router=useRouter()
 
 function toggleSidebar() {
   isOpen.value = !isOpen.value
@@ -17,6 +18,7 @@ function toggleSidebar() {
 
 async function logout() {
   await auth.logout()
+  router.push('/login')
 }
 </script>
 
@@ -31,7 +33,9 @@ async function logout() {
       <div>
         <div class="flex items-center justify-between p-5">
           <RouterLink to="/" class="text-lg font-bold text-primary truncate">
-            <span v-if="isOpen">MemoGrow</span>
+            <span v-if="isOpen">Memo
+              <span class="text-primary-secondary">Grow</span>
+            </span>
             <span v-else>M</span>
           </RouterLink>
         </div>
@@ -56,7 +60,7 @@ async function logout() {
       </div>
 
       <div class="border-t border-gray-200 dark:border-zinc-700 px-4 py-3">
-        <div class="flex items-center gap-3 mb-3">
+        <router-link to="/app/profile" class="flex items-center gap-3 mb-3">
           <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
             <User class="w-4 h-4 text-white" />
           </div>
@@ -68,7 +72,7 @@ async function logout() {
               {{ user?.email || 'No email' }}
             </p>
           </div>
-        </div>
+        </router-link>
         <button
           @click="logout"
           :class="[ 
