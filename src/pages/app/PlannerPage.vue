@@ -69,6 +69,7 @@ function prevMonth() {
   }
 }
 
+
 function nextMonth() {
   if (month.value === 11) {
     month.value = 0
